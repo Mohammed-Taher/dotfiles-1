@@ -2,19 +2,19 @@
 
 subinc=2
 subchange=$(echo "1 / $subinc" | bc -l)
-delay=$(echo "(0.02 / $2)/$subinc" | bc -l)
+delay=0.001
 opt=""
 
 
 getIcon() {
     if [ "$1" -eq 0 ]; then
-        echo "/home/kai/.icons/tmp/display-brightness-off-symbolic.svg"
+        echo "~/.icons/tmp/display-brightness-off-symbolic.svg"
     elif [ "$1" -lt 33 ]; then
-        echo "/home/kai/.icons/tmp/display-brightness-low-symbolic.svg"
+        echo "~/.icons/tmp/display-brightness-low-symbolic.svg"
     elif [ "$1" -lt 66 ]; then
-        echo "/home/kai/.icons/tmp/display-brightness-medium-symbolic.svg"
+        echo "~/.icons/tmp/display-brightness-medium-symbolic.svg"
     else
-        echo "/home/kai/.icons/tmp/display-brightness-high-symbolic.svg"
+        echo "~/.icons/tmp/display-brightness-high-symbolic.svg"
     fi
 
 }
@@ -42,6 +42,9 @@ for i in $(seq $2); do
         sleep "$delay"
     done
         
+    current=$(light)
+    truncated=$(echo "$current" | cut -d '.' -f1)
+
     
-    dunstify "Brightness at ${truncated}%" -i $(getIcon "$truncated") -a "Backlight" -u low -h "int:value:$current" -h string:x-dunst-stack-tag:backlight
+    dunstify "Brightness at ${truncated}%" -i $(getIcon "$truncated") -a "Backlight" -u normal -h "int:value:$current" -h string:x-dunst-stack-tag:backlight
 done

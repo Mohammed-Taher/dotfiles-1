@@ -1,3 +1,16 @@
 config/nvim/autoload/
 config/nvim/plugged/
+config/mpv/watch_later
+
+# eww setups not ready to be seen by the world
+config/eww/lcars/
+config/eww/bar/
+config/eww/dashboard/
+config/eww/tests/
+
+config/glava/*
+!config/glava/largebars*
+
 .netrwhist
+images/wall/nongit
+TODO.txt
